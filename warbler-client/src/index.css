@@ -1,18 +1,30 @@
 body {
   background-color: #e6ecf0;
+  transition: linear .3s;
 }
 
 /* Nav */
 .navbar {
   margin-bottom: 1rem;
 }
-
-.navbar a{
+.navbar li {
   font-weight: bold;
- 
+  color: blue;
 }
 
-.navbar a:hover {
+.navbar li:hover{
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar li > a{
+  font-weight: bold;
+  transition: linear .3s;
+  color: blue;
+}
+
+.navbar li > a:hover {
   color: white;
   text-decoration: none;
   cursor: pointer;

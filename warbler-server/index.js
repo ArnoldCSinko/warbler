@@ -7,6 +7,7 @@ const errorHandler = require("./handlers/error");
 const PORT = 8081;
 const authRoutes = require("./routes/auth");
 const messagesRoutes = require("./routes/messages");
+const allMessagesRoute = require("./routes/allMessages");
 const { loginRequired, ensureCorrectUser } = require("./middleware/auth")
 
 app.use(cors());
@@ -14,28 +15,13 @@ app.use(json());
 
 // ROUTES
 app.use("/api/auth", authRoutes);
-app.use(" /api/users/:id/messages", 
-    loginRequired, 
-    ensureCorrectUser, 
+app.use("/api/users/:id/messages",
+    loginRequired,
+    ensureCorrectUser,
     messagesRoutes
 );
 
-app.get("api/messages", 
-    loginRequired,
-    async function(req, res, next) {
-        try {
-            let messages = await db.messages.find()
-                .sort({createdAt: "desc"})
-                .populate("user", {
-                    username: true,
-                    profileImageURL: true
-                });
-            return res.status(200).json(messages);
-        } catch (err) {
-            next(err);
-        }
-    }
-);
+app.use("/api/messages", loginRequired, allMessagesRoute);
 
 // ROUTES NOT REACHED
 app.use((req, res, next) => {

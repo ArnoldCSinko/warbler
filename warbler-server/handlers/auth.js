@@ -10,7 +10,7 @@ exports.signin = async function (req, res, next) {
         });
         
         // Destructure user object
-        let { id, username, profileImageURL } = user;
+        let { id, username, profileImageUrl } = user;
         // Compare password
        
         let isMatch = await user.comparePassword(req.body.password);
@@ -19,12 +19,12 @@ exports.signin = async function (req, res, next) {
             let token = jwt.sign({
                 id,
                 username,
-                profileImageURL
+                profileImageUrl
             }, process.env.SECRET_KEY);
             return res.status(200).json({
                 id,
                 username,
-                profileImageURL,
+                profileImageUrl,
                 token
             });
         } else {
@@ -48,18 +48,18 @@ exports.signup = async function (req, res, next) {
         // Create a user object from request body
         let user = await db.User.create(req.body);
         // Destructure user object
-        let { id, username, profileImageURL } = user;
+        let { id, username, profileImageUrl } = user;
         // Create a token(Signing a token)
         // use process.env.SECRET_KEY
         let token = jwt.sign({
             id,
             username,
-            profileImageURL
+            profileImageUrl
         }, process.env.SECRET_KEY);
         return res.status(200).json({
             id,
             username,
-            profileImageURL,
+            profileImageUrl,
             token
         });
 

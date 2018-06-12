@@ -7,7 +7,6 @@ exports.createMessage = async function (req, res, next) {
             text: req.body.text,
             user: req.params.id
         });
-
         let foundUser = await User.findById(req.params.id);
         foundUser.messages.push(message.id);
         await foundUser.save();
@@ -44,9 +43,9 @@ exports.getAllMessages = async function (req, res, next) {
     }
 }
 
-exports.deleteMessage = async function (req, res, next) {
-    try {
-        let message = await Message.findById(req.params.message._id);
+exports.deleteMessage = async function (req, res, next) {        
+    try {        
+        let message = await Message.findById(req.params.message_id);       
         await message.remove();
         return res.status(200).json(message);
     } catch (err) {

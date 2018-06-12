@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchMessages } from "../store/actions/messages";
+import { fetchMessages, removeMessage } from "../store/actions/messages";
 import MessageItem from "../components/MessageItem";
 
 class MessageList extends Component {
@@ -9,26 +9,29 @@ class MessageList extends Component {
     }
 
     render() {
-        const { messages } = this.props;
-        let messageList = messages.map(m => 
-            <MessageItem 
-                key={m._id}
-                date={m.createdAt} 
-                text={m.text}
-                username={m.user.username}
-                profileImageUrl={m.user.profileImageUrl}
-            />);
-            return (
-                <div className=" row col-sm-8">
-                    <div className="offset-1 col-sm-10">
-                        <ul className="list-group" id="messages">
-                            {messageList}
-                        </ul>
-                    </div>
+        const { messages, removeMessage } = this.props;
+        let messageList = messages.map(m => {
+            const { _id: messageId, createdAt, text } = m;
+            const { _id: userId, username, profileImageUrl } = m.user;
+            return <MessageItem
+                key={messageId}
+                date={createdAt}
+                text={text}
+                username={username}
+                profileImageUrl={profileImageUrl}
+                removeMessage={removeMessage.bind(this, userId, messageId)}
+            />;
+        });
+        return (
+            <div className=" row col-sm-8">
+                <div className="offset-1 col-sm-10">
+                    <ul className="list-group" id="messages">
+                        {messageList}
+                    </ul>
                 </div>
-            );
+            </div>
+        );
     }
-
 }
 
 function mapStateToProps(state) {
@@ -37,4 +40,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { fetchMessages })(MessageList);
+export default connect(mapStateToProps, { fetchMessages, removeMessage })(MessageList);

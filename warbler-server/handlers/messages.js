@@ -43,7 +43,7 @@ exports.getAllMessages = async function (req, res, next) {
     }
 }
 
-exports.deleteMessage = async function (req, res, next) {        
+exports.deleteMessage = async function (req, res, next) {           
     try {        
         let message = await Message.findById(req.params.message_id);       
         await message.remove();

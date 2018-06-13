@@ -71,9 +71,25 @@ ul.nav.navbar-nav li {
 #messages .list-group-item {
   display: flex;
   align-items: flex-start;
-  padding: 7px 20px 12px;
+  padding: 7px 20px 12px;  
+  margin-bottom: 5px;
+  transition: all .5s;
 }
 
 #messages:not(.no-hover) .list-group-item:hover {
   background-color: #e6ecf0;
+  box-shadow: 2px 2px 2px 2px gray;
 }
+
+.timeline-image {
+  border-radius: 50px;
+  height: 48px;
+  width: 48px;
+  margin: 2px 30px 10px 10px;
+}
+
+a.btn.btn-danger,
+a.btn.btn-danger:hover {
+  color: white;
+}
+

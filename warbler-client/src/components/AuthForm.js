@@ -50,7 +50,7 @@ export default class Authform extends Component {
                                 <div>
                                     <label htmlFor="username">Username:</label>
                                     <input className="form-control" type="text" name="username" id="username" onChange={this.handleChange} value={username} />
-                                    <label htmlFor="profileImageURL">Profile Image URL:</label>
+                                    <label htmlFor="profileImageUrL">Profile Image URL:</label>
                                     <input className="form-control" type="text" name="profileImageUrl" id="profileImageUrl" onChange={this.handleChange} value={profileImageUrl} />
                                 </div>
                             )}
